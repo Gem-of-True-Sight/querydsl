@@ -56,14 +56,20 @@ public interface Fetchable<T> {
     CloseableIterator<T> iterate();
 
     /**
-     * Get the projection in {@link QueryResults} form
+     * Get the projection in {@link QueryResults} form.
+     *
+     * Use {@link #fetch()} instead if you do not need the total count of rows in the query result.
      *
      * @return results
+     * @see #fetch()
      */
     QueryResults<T> fetchResults();
 
     /**
      * Get the count of matched elements
+     *
+     * Note: not all QueryDSL modules might optimize fetchCount using a count query.
+     * An implementation is allowed to fall back to {@code fetch().size()}.
      *
      * @return row count
      */
